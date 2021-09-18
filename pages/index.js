@@ -1,3 +1,6 @@
+import { useAuthContext } from '../contexts/auth'
+
 export default function Home() {
-  return <div>Home page</div>
+  const { foo } = useAuthContext()
+  return <div>Home page: {foo}</div>
 }

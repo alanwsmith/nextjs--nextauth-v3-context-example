@@ -10,14 +10,16 @@ export function AuthWrapper({ children, securePage }) {
   let authData = {}
 
   useEffect(() => {
-    console.log(`Session: ${session}`)
-    console.log(`Loading: ${loading}`)
     if (loading) return
+    // This kicks over to sign in automatically if the page
+    // is flagged to be secure and the user isn't logged in
     if (session === null && loading === false && securePage) {
       signIn()
     }
   }, [session, loading, securePage])
 
+  // This looks like a duplicate, but it's needed to prevent
+  // the flash of unauthenticated content
   if (session === null && loading === false && securePage) {
     return null
   }

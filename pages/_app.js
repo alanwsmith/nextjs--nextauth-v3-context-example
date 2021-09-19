@@ -4,8 +4,9 @@ import Layout from '../components/layout'
 import '../styles/globals.css'
 
 function App({ Component, pageProps }) {
+  const securePage = Component.secure !== undefined ? Component.secure : true
   return (
-    <AuthWrapper>
+    <AuthWrapper securePage={securePage}>
       <Layout>
         <Component {...pageProps} />
       </Layout>

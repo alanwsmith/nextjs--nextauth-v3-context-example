@@ -7,8 +7,7 @@ const AuthContext = createContext()
 export function AuthWrapper({ children, securePage }) {
   const [session, loading] = useSession()
   const isUser = !!session?.user
-
-  let authData = { foo: 'bar' }
+  let authData = {}
 
   useEffect(() => {
     console.log(`Session: ${session}`)
@@ -24,11 +23,15 @@ export function AuthWrapper({ children, securePage }) {
   }
 
   if (session !== undefined && loading === false) {
+    authData.session = session
     return (
       <AuthContext.Provider value={authData}>{children}</AuthContext.Provider>
     )
   }
 
+  // return null while it's still working. Could
+  // set this and the other nulls up to return a backgroun
+  // color that matches the content for a little nicer experience
   return null
 }
 

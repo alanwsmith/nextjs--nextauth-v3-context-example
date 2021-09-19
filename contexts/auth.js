@@ -6,7 +6,6 @@ const AuthContext = createContext()
 
 export function AuthWrapper({ children, securePage }) {
   const [session, loading] = useSession()
-  const isUser = !!session?.user
   let authData = {}
 
   useEffect(() => {

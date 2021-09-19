@@ -1,23 +1,31 @@
 import { useAuthContext } from '../contexts/auth'
 import { signIn, signOut } from 'next-auth/client'
+import Link from 'react'
 
 export default function Layout({ children }) {
   const { session } = useAuthContext()
   if (session) {
     return (
       <>
-        <h2>Header: {session.user.name}</h2>
         <div>
-          <button onClick={() => signOut()}>Sign out</button>
+          <div>
+            Logged in as: {session.user.name} -{' '}
+            <button onClick={() => signOut()}>Sign out</button>
+          </div>
+          <hr />
+          {children}
         </div>
-        {children}
       </>
     )
   } else {
     return (
-      <div>
-        <button onClick={() => signIn()}>Sign in</button>
-      </div>
+      <>
+        <div>
+          Not logged in - <button onClick={() => signIn()}>Sign in</button>
+        </div>
+        <hr />
+        {children}
+      </>
     )
   }
 }

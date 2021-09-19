@@ -1,18 +1,19 @@
 import { useAuthContext } from '../contexts/auth'
 import { signIn, signOut } from 'next-auth/client'
-import Link from 'react'
+import Link from 'next/link'
 
 export default function Layout({ children }) {
   const { session } = useAuthContext()
+
   if (session) {
     return (
       <>
         <div>
           <div>
             Logged in as: {session.user.name} -{' '}
-            <button onClick={() => signOut()}>Sign out</button>
+            <button onClick={() => signOut()}>Sign Out</button>
           </div>
-          <hr />
+          <TheLinks />
           {children}
         </div>
       </>
@@ -21,11 +22,33 @@ export default function Layout({ children }) {
     return (
       <>
         <div>
-          Not logged in - <button onClick={() => signIn()}>Sign in</button>
+          Not logged in - <button onClick={() => signIn()}>Sign In</button>
         </div>
-        <hr />
+        <TheLinks />
         {children}
       </>
     )
   }
+}
+
+function TheLinks() {
+  return (
+    <>
+      <hr />
+      <div>
+        <Link href="/">
+          <a>Home Page</a>
+        </Link>{' '}
+        ~{' '}
+        <Link href="/unprotected-page">
+          <a>Unprotected Page</a>
+        </Link>{' '}
+        ~{' '}
+        <Link href="/protected-page">
+          <a>Protected Page</a>
+        </Link>
+      </div>
+      <hr />
+    </>
+  )
 }

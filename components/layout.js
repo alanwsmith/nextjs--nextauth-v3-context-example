@@ -46,6 +46,14 @@ function TheLinks() {
         ~{' '}
         <Link href="/protected-page">
           <a>Protected Page</a>
+        </Link>{' '}
+        ~{' '}
+        <Link href="/api/unprotected-api">
+          <a>Unprotected API Route</a>
+        </Link>{' '}
+        ~{' '}
+        <Link href="/api/protected-api">
+          <a>Protected API Route</a>
         </Link>
       </div>
       <hr />
